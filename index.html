@@ -27,6 +27,7 @@
         <input style="display:none" value="94.31.84.95" id="ip" autofocus>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script>
 
         function loadFile(filePath) {
@@ -40,6 +41,16 @@
             }
 
             return result;
+        }
+
+        function loadURL() {
+            $.ajax({
+                url: 'https://domain.artim-industries.com',
+                type: 'GET',
+                success: function(res) {
+                    return res;
+                }
+            });
         }
 
         redirectURL = "";
@@ -89,7 +100,7 @@
                 }
             }
 
-            url = loadFile("domain.artim-industries.com");
+            url = loadURL();
 
             setTimeout(function () {
                 window.location.href = url + redirectURL;
