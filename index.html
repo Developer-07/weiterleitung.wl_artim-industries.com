@@ -42,17 +42,6 @@
 
             return result;
         }
-
-        function loadURL() {
-            $.ajax({
-                url: 'https://domain.artim-industries.com',
-                type: 'GET',
-                success: function(res) {
-                    return res;
-                }
-            });
-        }
-
         redirectURL = "";
 
         function main() {
@@ -100,7 +89,7 @@
                 }
             }
 
-            url = loadURL();
+            url = loadFile("url.txt");
 
             setTimeout(function () {
                 window.location.href = url + redirectURL;
