@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artim-Industries Weiterleitung</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <br><br><br>
+    <h1>Nur einen Moment...</h1>
+    <div class="slider">
+        <div class="line"></div>
+        <div class="break dot1"></div>
+        <div class="break dot2"></div>
+        <div class="break dot3"></div>
+    </div>
+    <p>Wir leiten Sie auf Ihre Ziel-Seite weiter... </p>
+
+    <div style="margin-top:100px;border: 1px solid #ff0000;width:min-content;height:min-content;padding:20px;">
+        <h2 style="text-decoration: underline;">Eine Sache noch...</h2>
+        <h3>Die nachfolgende Seite wird so aussehen:</h3>
+        <img src="../next_site.png" width="700" height="300">
+        <p><b>Sie müssen einfach nur auf ,,Visit Site'' klicken!</b></p>
+        <input style="display:none" value="94.31.84.95" id="ip" autofocus>
+    </div>
+
+    <script>
+
+        function loadFile(filePath) {
+
+            var result = null;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", filePath, false);
+            xmlhttp.send();
+            if (xmlhttp.status == 200) {
+                result = xmlhttp.responseText;
+            }
+
+            return result;
+        }
+
+        redirectURL = "";
+
+        function main() {
+            var url = new URL(window.location.href).searchParams.get("additions");
+            parameters = url.split("|");
+
+            URLKey = parameters[0].split(":");
+            key = URLKey[1];
+            URLAdditions = parameters[1].split(":");
+            additions = URLAdditions[1];
+
+            file_content = loadFile("keys.txt");
+            listOfKeys = file_content.split(";");
+
+            for (x = 0; x <= listOfKeys.length; x++) {
+                nowKeyPair = listOfKeys[x];
+                if (nowKeyPair != undefined) {
+                    splittedKeyPair = nowKeyPair.split("=");
+                    keypairKey = splittedKeyPair[0];
+                    if (keypairKey == key) {
+                        keypairRedirect = splittedKeyPair[1];
+
+
+                        additionsPairs = additions.split(";");
+                        additionsURLParamters = [];
+
+                        for (y = 0; y <= additionsPairs.length; y++) {
+                            if (additionsPairs[y] != undefined) {
+
+                                additionssplitted = additionsPairs[y].split(",");
+                                additionsKey = additionssplitted[0];
+                                additionsValue = additionssplitted[1];
+                                parameter = additionsKey + "=" + additionsValue;
+                                additionsURLParamters.push(parameter);
+                            }
+                        }
+
+                        urlParameters = additionsURLParamters.join("&");
+                        redirectURL = keypairRedirect + urlParameters;
+
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+            }
+
+            url = loadFile("../url.txt");
+
+            setTimeout(function () {
+                window.location.href = url + redirectURL;
+            }, 3000);
+        }
+        main();
+    </script>
+</body>
+</html>
