@@ -1,0 +1,1 @@
+academy_status=/academy/status?;methacore_join_group=/methacore/joinViaCode.php?;academy_reg=/academy/application?;impress=/industries/impressum?;academy=/academy/?;industries=/industries/?;methacore_shop=/industries/methacore/shop/?;academy=/academy/?;industries=/industries/?;methacore=/methacore/?;methacore_testphase=/methacore/test-phase/start?;default=/?
